@@ -13,16 +13,13 @@ export const login = async (req, res) => {
     }
 
     const userFound = await User.findOne({ email: email });
-    console.log('userFound', userFound);
 
     if (!userFound)
       return res
         .status(404)
-        .json({ status: 'failed', message: 'user not found' });
+        .json({ status: 'fail', message: 'user not found' });
 
     const ispassWordValid = await bcrypt.compare(password, userFound.password);
-
-    console.log('PASSWORD', ispassWordValid);
 
     if (!ispassWordValid)
       return res
@@ -30,8 +27,6 @@ export const login = async (req, res) => {
         .json({ status: 'fail', error: 'Invalid email or password' });
 
     const roles = Object.values(userFound.roles);
-
-    console.log('ROLES', roles);
 
     const accessToken = jwt.sign(
       {
@@ -51,8 +46,6 @@ export const login = async (req, res) => {
       process.env.REFRESH_SECRET_TOKEN,
       { expiresIn: '1d' }
     );
-
-    console.log('access && refresh token', accessToken, refreshToken);
 
     userFound.refreshToken = refreshToken;
     await userFound.save();

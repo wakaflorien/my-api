@@ -4,12 +4,12 @@ dotenv.config()
 
 export const verifyUserToken = (req, res, next) => {
     if(!req.headers.authorization){
-        return res.status(401).json({"status": "failed", "message": "Unauthorized request!"})
+        return res.status(401).json({"status": "fail", "message": "Unauthorized request!"})
     }
 
     const token = req.headers['authorization'].split(" ")[1]
     if(!token){
-        return res.status(401).json({"status": "failed", "message":"Access denied. No token provided."})
+        return res.status(401).json({"status": "fail", "message":"Access denied. No token provided."})
     }
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_SECRET_TOKEN);
@@ -18,6 +18,6 @@ export const verifyUserToken = (req, res, next) => {
 
         next()
     } catch (error) {
-        res.status(400).json({"status": "failed", "message":"Invalid token."})
+        res.status(400).json({"status": "fail", "message":"Invalid token."})
     }
 }
