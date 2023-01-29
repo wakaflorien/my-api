@@ -1,6 +1,6 @@
 export const verifyRoles = (...allowedRoles) => {
     return (req, res, next) => {
-        if(!req?.roles) return res.status(401).json({"status": "failed", "message": "Unauthorized"})
+        if(!req?.roles) return res.status(401).json({"status": "fail", "message": "Unauthorized"})
         
         const rolesArray = [...allowedRoles]
         console.log(rolesArray)

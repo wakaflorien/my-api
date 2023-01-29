@@ -24,11 +24,11 @@ export const createUser = async (req, res) => {
       lastname: lastname,
     });
 
-    console.log(result);
-
-    res
-      .status(201)
-      .json({ status: 'success', data: { User: `${email} created` } });
+    res.status(201).json({
+      status: 'success',
+      message: 'user created',
+      data: { User: `${email} created` },
+    });
   } catch (error) {
     res.status(500).json({ status: 'fail', error: error.message });
   }
@@ -41,13 +41,13 @@ export const updateUser = async (req, res) => {
     if (!req.user)
       return res
         .status(400)
-        .json({ status: 'fail', error: 'no logged in user' });
-    const user = await User.findOne({ email: req.user });
+        .json({ status: 'fail', message: 'no logged in user' });
+    const user = await User.findOne({ email: email });
 
     if (!user)
       return res
         .status(404)
-        .json({ status: 'fail', error: 'no user match found' });
+        .json({ status: 'fail', message: 'no user match found' });
 
     if (!firstname || !lastname || !email || !password) {
       res.status(400).json({ status: 'fail', message: 'required fields' });
@@ -60,7 +60,6 @@ export const updateUser = async (req, res) => {
     if (lastname) user.lastname = lastname;
 
     const result = await user.save();
-    console.log(result);
 
     res
       .status(200)

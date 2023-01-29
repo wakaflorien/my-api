@@ -7,10 +7,11 @@
     "test": "src/tests"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "cross-env NODE_ENV=prod node dist/index.js",
     "build": "babel src -d dist",
-    "dev": "npx kill-port 7070 && nodemon --exec babel-node src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node src",
+    "test": "cross-env NODE_ENV=test mocha --recursive --exit --timeout 10000000000 --require @babel/register src/test/*.test.js",
+    "coverage": "c8 --check-coverage -r lcov npm run test"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3"
   },
@@ -38,10 +40,15 @@
     "@babel/core": "^7.20.12",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
+    "c8": "^7.12.0",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.20"
   }
 }
