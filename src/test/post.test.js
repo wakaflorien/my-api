@@ -54,29 +54,7 @@ describe('Posts', () => {
       done();
     });
   });
-
-  describe('🔽🔽 /GET post', () => {
-    it('✅✅ it should GET all the posts', (done) => {
-      chai
-        .request(app)
-        .get('/api/v1/post')
-        .end((err, res) => {
-          chai.expect(res.req.method).to.equal('GET');
-          chai.expect(res.req.path).to.equal('/api/v1/post');
-          chai.expect(res).to.have.status(200);
-          chai.expect(res.body.data).to.be.a('array');
-          chai.expect(res.body.status).to.equal('success');
-          chai.expect(res.body.status).to.be.a('string');
-          chai.expect(res.body).to.have.property('message').with.lengthOf(9);
-          done();
-        });
-    });
-  });
-
-  /*
-   * Test the /POST route
-   */
-  describe('🔽🔽 /POST post', () => {
+describe('🔽🔽 /POST post', () => {
     it('❌❌ it should not POST a post without authorization', (done) => {
       chai
         .request(app)
@@ -129,7 +107,7 @@ describe('Posts', () => {
         });
     });
   });
-  
+
   describe('🔽🔽 /GET post', () => {
     it('✅✅ It should GET a single post', (done) => {
       chai
