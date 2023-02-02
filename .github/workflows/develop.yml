@@ -1,0 +1,39 @@
+name: Continuous Development Integration
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+    env:
+      DATABASE_URI: ${{secrets.DATABASE_URI}}
+      DATABASE_TEST_URI: ${{secrets.DATABASE_TEST_URI}}
+      ACCESS_SECRET_TOKEN: ${{secrets.ACCESS_SECRET_TOKEN}}
+      REFRESH_SECRET_TOKEN: ${{secrets.REFRESH_SECRET_TOKEN}}
+      PORT: ${{secrets.PORT}}
+    steps:
+      - name: Development Code
+        uses: actions/checkout@v1
+      - name: 'Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}'
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - name: Run tests and generate coverage reports
+        run: npm run coverage
+      # - name: Coveralls GitHub Action
+      #   uses: coverallsapp/github-action@1.1.3
+      #   with:
+      #     github-token: ${{secrets.COVERALLS_REPO_TOKEN}}
+      - name: send coverage report
+        uses: paambaati/codeclimate-action@v2.5.7
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_REPORT}}

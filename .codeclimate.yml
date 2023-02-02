@@ -1,0 +1,24 @@
+version: '2'
+checks:
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 5
+  file-lines:
+    enabled: true
+    config:
+      threshold: 250
+  method-lines:
+    enabled: true
+    config:
+      threshold: 45
+exclude_patterns:
+  - '**/test/'
+  - '**/__test__/'
+  - 'coverage/'
+  - 'seeders/'
+  - 'migrations/'
+  - 'utils/renderMail.js'
+  - 'models/'
+  - '*.test.js'
+  - '/**/*{V,v}alidation.js'
