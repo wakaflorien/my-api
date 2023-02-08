@@ -7,7 +7,7 @@
     "test": "src/tests"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=prod node dist/index.js",
+    "start": "node dist/index.js",
     "build": "babel src -d dist",
     "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node src",
     "test": "cross-env NODE_ENV=test mocha --recursive --exit --timeout 10000000000 --require @babel/register src/test/*.test.js",
