@@ -109,6 +109,24 @@ describe('🔽🔽 /POST post', () => {
   });
 
   describe('🔽🔽 /GET post', () => {
+    it('✅✅ It should GET all posts', (done) => {
+      chai
+        .request(app)
+        .get(`/api/v1/post`)
+        .end((err, res) => {
+          chai.expect(res).to.have.status(200);
+          chai
+            .expect(res.body)
+            .to.have.property('status')
+            .with.equal('success');
+          chai
+            .expect(res.body)
+            .to.have.property('message')
+            .with.equal('all posts');
+          chai.expect(res.body.data).to.be.a('array');
+          done();
+        });
+    });
     it('✅✅ It should GET a single post', (done) => {
       chai
         .request(app)
@@ -167,7 +185,7 @@ describe('🔽🔽 /POST post', () => {
         .set({ Authorization: `Bearer ${token}` })
         .send(postUpdate)
         .end((err, res) => {
-          chai.expect(res).to.have.status(400);
+          chai.expect(res).to.have.status(404);
           chai.expect(res.body).to.have.property('status').with.equal('fail');
           chai
             .expect(res.body)
@@ -237,7 +255,7 @@ describe('🔽🔽 /POST post', () => {
         .set({ Authorization: `Bearer ${token}` })
         .send(postUpdate)
         .end((err, res) => {
-          chai.expect(res).to.have.status(204);
+          chai.expect(res).to.have.status(200);
           chai.expect(res.body).to.be.a('object');
           chai.expect(res.req.method).to.equal('DELETE');
           chai.expect(res.req.path).to.equal(`/api/v1/post/${id}`);
