@@ -1,10 +1,6 @@
-![Continuous integration](https://github.com/wakaflorien/my-api/actions/workflows/develop.yml/badge.svg?event=push)
+![Continuous integration](https://github.com/wakaflorien/my-api/actions/workflows/develop.yml/badge.svg?event=push) [![Maintainability](https://api.codeclimate.com/v1/badges/a9e600e5d98dd6ff5fd3/maintainability)](https://codeclimate.com/github/wakaflorien/my-api/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/a9e600e5d98dd6ff5fd3/test_coverage)](https://codeclimate.com/github/wakaflorien/my-api/test_coverage)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/a9e600e5d98dd6ff5fd3/maintainability)](https://codeclimate.com/github/wakaflorien/my-api/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a9e600e5d98dd6ff5fd3/test_coverage)](https://codeclimate.com/github/wakaflorien/my-api/test_coverage)
-
-[![Coverage Status](https://coveralls.io/repos/github/wakaflorien/my-api/badge.svg?branch=develop)](https://coveralls.io/github/wakaflorien/my-api?branch=develop)
+<!-- [![Coverage Status](https://coveralls.io/repos/github/wakaflorien/my-api/badge.svg?branch=develop)](https://coveralls.io/github/wakaflorien/my-api?branch=develop) -->
 
 ### Node js best practices project
 
