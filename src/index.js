@@ -10,6 +10,7 @@ dotenv.config();
 
 import { connectDB } from './config/dbConnect.js';
 import posts from './routes/api/posts.js';
+import messages from './routes/api/contacts.js';
 import users from './routes/auth/register.js';
 import login from './routes/auth/login.js';
 import { options } from './config/options.js';
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specifications));
 app.use('/api/v1', posts);
+app.use('/api/v1', messages);
 app.use('/api/v1', users);
 app.use('/api/v1', login);
 

@@ -11,3 +11,22 @@ export const postValidate = (data) => {
   const value = schema.validate(data, { abortEarly: false });
   return value;
 };
+
+export const messageValidate = (data) => {
+  const schema = Joi.object().keys({
+    fullName: Joi.string().required(),
+    email: Joi.string().required().email(),
+    message: Joi.string().min(20).required(),
+  });
+
+  const value = schema.validate(data, { abortEarly: false });
+  return value;
+};
+
+export const updateMessageValidate = (data) => {
+  const schema = Joi.object().keys({
+    message: Joi.string().min(20).required(),
+  });
+  const value = schema.validate(data, { abortEarly: false });
+  return value;
+};
