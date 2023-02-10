@@ -3,7 +3,7 @@ import { postValidate } from '../validation/postValidSchema.js';
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ dateCreated: -1 });
     res
       .status(200)
       .json({ status: 'success', message: 'all posts', data: posts });
