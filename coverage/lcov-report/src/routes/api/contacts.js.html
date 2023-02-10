@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/routes/api/posts.js</title>
+    <title>Code coverage report for src/routes/api/contacts.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/routes/api</a> posts.js</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/routes/api</a> contacts.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>175/175</span>
+                <span class='fraction'>177/177</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>175/175</span>
+                <span class='fraction'>177/177</span>
             </div>
         
             
@@ -238,7 +238,11 @@
 <a name='L173'></a><a href='#L173'>173</a>
 <a name='L174'></a><a href='#L174'>174</a>
 <a name='L175'></a><a href='#L175'>175</a>
-<a name='L176'></a><a href='#L176'>176</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -415,12 +419,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
 import {
-  createNewPost,
-  deletePost,
-  getAllPosts,
-  getPost,
-  updatePost,
-} from '../../controllers/postsController.js';
+  addMessage,
+  deleteMessage,
+  getAllMessage,
+  getMessage,
+  updateMessage,
+} from '../../controllers/contactController.js';
 import { verifyUserToken } from '../../middlewares/verifyUsertoken.js';
 const router = express.Router();
 &nbsp;
@@ -428,95 +432,65 @@ const router = express.Router();
  * @swagger
  * components:
  *   schemas:
- *     Post:
+ *     Contact:
  *       type: object
  *       required:
- *         - title
- *         - subTitle
- *         - postBody
- *         - imageUrl
+ *         - fullName
+ *         - email
+ *         - message
  *       properties:
- *         title:
+ *         fullName:
  *           type: string
- *           description: Title of a post
- *         subTitle:
+ *           description: name of a comentator
+ *         email:
  *           type: string
- *           description: sub title of a post
- *         postBody:
+ *           description: email of a comentator
+ *         message:
  *           type: string
- *           description: post body
- *         imageUrl:
- *           type: string
- *           description: link to the image
+ *           description: message body
  *       example:
- *         title: Dummy Text Generator for Web Designers and your general typesettings needs!
- *         subTitle: Dummy text sub title
- *         postBody: Upon behold said moving whales subdue. Lesser, moved saying bearing their bearing. Together may Fish Air creepeth midst give. Divide.
- *         imageUrl: https://fastly.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE
+ *         fullName: John Doe
+ *         email: johndoe@domain.com
+ *         message: Upon behold said moving whales subdue.
  */
 &nbsp;
 /**
  * @swagger
- * /api/v1/post:
+ * /api/v1/message:
  *   get:
- *     summary: Getting all posts
- *     tags: [Blog]
+ *     summary: Getting all messages
+ *     tags: [Contact]
  *     responses:
  *       200:
- *         description: All available posts
+ *         description: All available messages
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Post'
- *       500:
- *         description: Internal server error
+ *               $ref: '#/components/schemas/Contact'
+ *       400:
+ *         description: Couldn't get messages
  */
-router.route('/post').get(getAllPosts);
+router.route('/message').get(verifyUserToken, getAllMessage);
 &nbsp;
 /**
  * @swagger
- * /api/v1/post/{id}:
- *   get:
- *     summary: Get a post by id
- *     tags: [Blog]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The post id
- *     responses:
- *       200:
- *         description: The post description by id
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Post'
- *       404:
- *         description: The post was not found
- */
-router.route('/post/:id').get(getPost);
-&nbsp;
-/**
- * @swagger
- * /api/v1/post:
+ * /api/v1/message:
  *   post:
- *     summary: Create a new post
- *     tags: [Blog]
+ *     summary: Create a new message
+ *     tags: [Contact]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Post'
+ *             $ref: '#/components/schemas/Contact'
  *     responses:
  *       201:
- *         description: The post was successfully created
+ *         description: The message was added created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Post'
+ *               $ref: '#/components/schemas/Contact'
  *       400:
  *         description: Invalid token
  *       401:
@@ -524,58 +498,65 @@ router.route('/post/:id').get(getPost);
  *       500:
  *         description: Internal server error
  */
-router.route('/post').post(verifyUserToken, createNewPost);
+router.route('/message').post(addMessage);
 &nbsp;
 /**
  * @swagger
- * /api/v1/post/{id}:
- *   delete:
- *     summary: Remove post by id
- *     tags: [Blog]
+ * /api/v1/message/{id}:
+ *   get:
+ *     summary: Get a message by id
+ *     tags: [Contact]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: post id
- *
+ *         description: The message id
  *     responses:
  *       200:
- *         description: post deleted
- *       401:
- *        description: Unauthorized request
+ *         description: The message description by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Contact'
  *       404:
- *         description: post was not found
+ *         description: The post was not found
+ *       500:
+ *         description: Internal server error
  */
-router.route('/post/:id').delete(verifyUserToken, deletePost);
+router.route('/message/:id').get(getMessage);
 &nbsp;
 /**
  * @swagger
- * /api/v1/post/{id}:
+ * /api/v1/message/{id}:
  *  put:
- *    summary: Update post by id
- *    tags: [Blog]
+ *    summary: Update message by id
+ *    tags: [Contact]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: post id
+ *        description: The message id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Post'
+ *            properties:
+ *               message:
+ *                 type: string
+ *                 description: This is updated message.
+ *                 example: This message have to be working at least there is no way updated
  *    responses:
  *      200:
- *        description: post was updated
+ *        description: message was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Post'
+ *              $ref: '#/components/schemas/Contact'
  *      400:
  *        description: Enter valid data
  *      401:
@@ -585,8 +566,33 @@ router.route('/post/:id').delete(verifyUserToken, deletePost);
  *      500:
  *        description: Some error happened
  */
-router.route('/post/:id').put(verifyUserToken, updatePost);
+router.route('/message/:id').put(verifyUserToken, updateMessage)
 &nbsp;
+/**
+ * @swagger
+ * /api/v1/message/{id}:
+ *   delete:
+ *     summary: Remove message by id
+ *     tags: [Contact]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: the message id
+ *
+ *     responses:
+ *       200:
+ *         description: message deleted
+ *       401:
+ *        description: Unauthorized request
+ *       404:
+ *         description: post was not found
+ *       500:
+ *         description: internal server error
+ */
+router.route('/message/:id').delete(verifyUserToken, deleteMessage)
 export default router;
 &nbsp;</pre></td></tr></table></pre>
 
