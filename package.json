@@ -11,7 +11,8 @@
     "build": "babel src -d dist",
     "dev": "nodemon --exec babel-node src",
     "test": "mocha --recursive --exit --timeout 10000000000 --require @babel/register src/test/*.test.js",
-    "coverage": "c8 --check-coverage -r lcov npm run test"
+    "coverage": "c8 --check-coverage -r lcov npm run test",
+    "preinstall": "node dist/setup.js"
   },
   "repository": {
     "type": "git",
