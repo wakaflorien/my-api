@@ -7,6 +7,10 @@ import {
   updateMessage,
 } from '../../controllers/contactController.js';
 import { verifyUserToken } from '../../middlewares/verifyUsertoken.js';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+
 const router = express.Router();
 
 /**
