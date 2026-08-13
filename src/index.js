@@ -15,6 +15,9 @@ import users from './routes/auth/register.js';
 import login from './routes/auth/login.js';
 import { options } from './config/options.js';
 import { corsOptions } from './config/corsOption.js';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 const app = express();
 const PORT = 7070 || process.env.PORT;
@@ -45,3 +48,4 @@ mongoose.connection.once('open', () => {
   );
 });
 export default app;
+
