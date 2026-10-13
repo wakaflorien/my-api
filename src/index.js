@@ -16,6 +16,10 @@ import login from './routes/auth/login.js';
 import { options } from './config/options.js';
 import { corsOptions } from './config/corsOption.js';
 import { createRequire } from 'module';
+import { createRequire } from 'module';
+
+var require = createRequire(import.meta.url);
+var module = { exports: {} };
 
 const require = createRequire(import.meta.url);
 
@@ -48,4 +52,3 @@ mongoose.connection.once('open', () => {
   );
 });
 export default app;
-
